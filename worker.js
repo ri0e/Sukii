@@ -1,8 +1,6 @@
-// Use dynamic import instead of static import
 self.onmessage = async (e) => {
   const level = e.data;
   try {
-    // Dynamically import the sudoku-core module
     const { generate } = await import("https://esm.sh/sudoku-core");
     const puzzle = generate(level);
     self.postMessage(puzzle);
@@ -11,3 +9,4 @@ self.onmessage = async (e) => {
     self.postMessage(null);
   }
 };
+
