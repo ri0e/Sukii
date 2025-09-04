@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading Page</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@75..125,300..700&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        text-align: center;
+        font-family: "Fredoka", sans-serif;
+        color: #1f8ef1;
+        background: #e0f0ff;
+      }
+
+      #loading {
+        font-size: 3.5rem;
+        height: 80px;
+        margin-bottom: 1rem;
+        text-align: center;
+        font-weight: 500;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+
+      #x {
+        font-size: 1.5rem;
+        font-weight: 500;
+        min-height: 2rem;
+        margin-top: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        color: #1f8ef1;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading-page">
+      <h1 id="gen">Generating...</h1>
+      <div id="loading"></div>
+      <p id="x">loading...</p>
+    </div>
+
+    <script>
+      const loading = document.getElementById("loading");
+      const x = document.getElementById("x");
+      const texts = [
+        "O_O",
+        "0_O",
+        " _0",
+        " 0",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        " 0",
+        "0_",
+        "O_0",
+        "O_O",
+      ];
+      let index = 0;
+
+      const words = [
+        "loading...",
+        "loading..",
+        "loading.",
+        "you still waiting?",
+        `what's up?`,
+        "you are pretty you know that?",
+        "hehehe",
+        "go to sleep kid",
+      ];
+
+      // Text animation
+      setInterval(() => {
+        loading.textContent = texts[index];
+        index = (index + 1) % texts.length;
+      }, 100);
+
+      // Word animation
+      let wordIndex = 0;
+      setInterval(() => {
+        x.textContent = words[wordIndex];
+        wordIndex = (wordIndex + 1) % words.length;
+      }, 2000);
+    </script>
+  </body>
+</html>
