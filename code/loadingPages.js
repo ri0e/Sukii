@@ -1,4 +1,5 @@
 const loading = document.getElementById("loading");
+
 const x = document.getElementById("x");
 const texts = [
   "O_O",
