@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sukii</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="bgAnimation.js" type="module"></script>
+    <script defer src="loadingPages.js"></script>
+    <script defer src="sudoku.js"></script>
+  </head>
+  <body>
+    <!-- The board (not used yet) -->
+    <div id="board"></div>
+
+    <!-- BG -->
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- Loading screen -->
+    <div id="loading-page">
+      <h1 id="gen">Generating...</h1>
+      <div id="loading"></div>
+      <p id="x">loading...</p>
+    </div>
+
+    <!-- Home section -->
+    <div class="home">
+      <h1 id="title"><a href="" target="_self">Sukii</a></h1>
+      <h3 id="description">
+        Solve, Smile, Repeat. Sukii Makes Sudoku Sweet
+        <img src="../assets/1.png" alt="wink kaomji" height="30px" />
+      </h3>
+      <button id="play">Let's Play!</button>
+      <p id="hint">
+        <a href="#how-to-play"
+          >Don't Know How to Play? No Problem! Click Here!</a
+        >
+      </p>
+    </div>
+
+    <!-- Game instructions section -->
+    <div class="how-to-play">
+      <h2 id="how">How To Play Sudoku</h2>
+      <ul class="instructions">
+        <li>
+          Pick a Puzzle – Choose your favorite level and get cozy
+          <img
+            src="../assets/2.png"
+            alt="kaomji"
+            height="13px"
+            style="transform: translateY(3px)"
+          />
+        </li>
+        <li>
+          Fill the Grid – Each row, column, and box needs numbers 1–9, no
+          repeats!
+          <img
+            src="../assets/3.png"
+            alt="kaomji"
+            height="15px"
+            style="transform: translateY(1px)"
+          />
+        </li>
+        <li>
+          Take Your Time – It’s not a race, sip some tea and think it through
+          <img
+            src="../assets/4.png"
+            alt="kaomji"
+            height="15px"
+            style="transform: translateY(1px)"
+          />
+        </li>
+        <li>
+          Use Hints – Stuck? Tap for a little help — we’ve got your back
+          <img
+            src="../assets/5.png"
+            alt="kaomji"
+            height="15px"
+            style="transform: translateY(2px)"
+          />
+        </li>
+        <li>
+          Enjoy the Win – Sit back and admire your clever work
+          <img
+            src="../assets/6.png"
+            alt="kaomji"
+            height="18px"
+            style="transform: translateY(4px)"
+          />
+        </li>
+      </ul>
+    </div>
+
+    <!-- About section -->
+    <div class="about">
+      <h2>About Sukii</h2>
+      <h4>Why I Made Sukii</h4>
+      <p>
+        Sudoku is my favorite, but I wished it felt warmer and cuter… so I made
+        Sukii for you (and me hehe)!
+      </p>
+      <h4>Have a Good Idea or Tip for Sukii? Tell me!</h4>
+      <p>
+        <a href="">E-mail</a>
+        <a href="">Insta</a>
+        <a href="">Github</a>
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>Made with 🩷 by the Weirdo Rei >w<</p>
+    </footer>
+  </body>
+</html>
