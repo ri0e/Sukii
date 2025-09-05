@@ -9,13 +9,14 @@ const speedY = 1.4;
 let cells = [];
 let lastTime = 0;
 const fpsInterval = 1000 / 60;
+
+// Resize canvas function (need fix)
 function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   generateCells();
 }
 
-// Resize canvas function (need fix)
 window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
 
@@ -98,3 +99,4 @@ function animate(timestamp) {
 }
 
 requestAnimationFrame(animate);
+
