@@ -10,6 +10,9 @@ let cells = [];
 let lastTime = 0;
 const fpsInterval = 1000 / 60;
 
+// Control the loading page mode
+let bgMode = "numbers";
+
 // Resize canvas function (need fix)
 function resizeCanvas() {
   canvas.width = window.innerWidth;
@@ -17,9 +20,30 @@ function resizeCanvas() {
   generateCells();
 }
 
+// Load kaomoji Imgs
+const kaomojiSources = [
+  "./assets/kittens/0.png",
+  "./assets/kittens/1.png",
+  "./assets/kittens/2.png",
+  "./assets/kittens/3.png",
+  "./assets/kittens/4.png",
+  "./assets/kittens/5.png",
+  "./assets/kittens/6.png",
+  "./assets/kittens/7.png",
+  "./assets/kittens/8.png",
+];
+
+let kaomojiImgs = [];
+for (let src of kaomojiSources) {
+  const img = new Image();
+  img.src = src;
+  kaomojiImgs.push(img);
+}
+
 window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
 
+// Shuffle helper function
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -28,7 +52,12 @@ function shuffle(array) {
   return array;
 }
 
-// Generate cells with numbers
+function setBgMode(mode) {
+  bgMode = mode;
+  generateCells();
+}
+
+// Generate cells with numbers OR imgs(based on bgMode)
 function generateCells() {
   cells = [];
   const cols = Math.ceil(canvas.width / cellSize) + 4;
@@ -37,15 +66,25 @@ function generateCells() {
   const startY = -2 * cellSize;
 
   for (let r = 0; r < rows; r++) {
-    let rowNums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    shuffle(rowNums);
+    let rowNums = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    let rowImgs = shuffle([...kaomojiImgs]);
+
     for (let c = 0; c < cols; c++) {
-      cells.push({
-        num: rowNums[c % rowNums.length],
-        x: startX + c * cellSize,
-        y: startY + r * cellSize,
-        color: "hsla(210, 100%, 80%, 1.00)",
-      });
+      if (bgMode === "images") {
+        cells.push({
+          type: "image",
+          value: rowImgs[c % rowImgs.length],
+          x: startX + c * cellSize,
+          y: startY + r * cellSize,
+        });
+      } else {
+        cells.push({
+          type: "number",
+          value: rowNums[c % rowNums.length],
+          x: startX + c * cellSize,
+          y: startY + r * cellSize,
+        });
+      }
     }
   }
 }
@@ -53,17 +92,28 @@ function generateCells() {
 // Draw cells
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.font = "bold " + cellSize * 0.65 + "px Fredoka";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
 
   for (let cell of cells) {
-    ctx.fillStyle = cell.color;
-    ctx.fillText(cell.num, cell.x, cell.y);
+    if (cell.type === "number") {
+      ctx.font = "bold " + cellSize * 0.65 + "px Fredoka";
+      ctx.fillStyle = "#99ccffff";
+      ctx.fillText(cell.value, cell.x, cell.y);
+    } else if (cell.type === "image" && cell.value.complete) {
+      ctx.globalAlpha = 0.5;
+      ctx.drawImage(
+        cell.value,
+        cell.x - cellSize / 2,
+        cell.y - cellSize / 2,
+        cellSize,
+        cellSize
+      );
+    }
   }
 }
 
-// Update cell positions
+// Update cells' positions
 function update(timestamp) {
   if (!lastTime) lastTime = timestamp;
   const elapsed = timestamp - lastTime;
@@ -99,4 +149,4 @@ function animate(timestamp) {
 }
 
 requestAnimationFrame(animate);
-
+setBgMode("numbers");
