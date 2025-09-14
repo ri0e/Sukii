@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@75..125,300..700&display=swap");
 
+/* Setup */
 * {
   margin: 0;
   padding: 0;
@@ -18,6 +19,7 @@ body {
   text-align: center;
 }
 
+/* Canvas */
 canvas {
   width: 100%;
   height: 100vh;
@@ -30,8 +32,9 @@ canvas {
   height: 100vh;
   z-index: -10;
 }
-
-/* Pages */
+/*---------*/
+/*- Pages -*/
+/*---------*/
 .home,
 .how-to-play {
   height: 100vh;
@@ -48,11 +51,76 @@ canvas {
   align-items: center;
 }
 
-.home {
-  background: transparent;
+/*---------------*/
+/* Settings Page */
+/*---------------*/
+.settings {
+  height: 100vh;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  flex-direction: row;
 }
 
-/* Loading page */
+.settings h3 {
+  font-size: 2.2rem;
+  font-family: "Trebuchet MS", sans-serif;
+  margin: 1rem;
+}
+
+.settings div .options {
+  display: grid;
+  grid-template-columns: repeat(4, 160px);
+  grid-template-rows: repeat(2, 65px);
+  width: 50%;
+}
+.settings .board-container {
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+label {
+  font-size: 1.5rem;
+  margin: 0rem 0.3rem 0rem 2rem;
+}
+
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border: 1px #333 solid;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  background: #fff;
+  margin-right: 0.3rem;
+  margin-left: 1rem;
+}
+
+input[type="radio"]:checked {
+  background: #1f8ef1;
+  border-color: #1f8ef1;
+}
+
+input[value="red"] {
+  grid-row-start: 2;
+}
+input[value="pink"] {
+  grid-row-start: 2;
+}
+input[value="purple"] {
+  grid-row-start: 2;
+}
+
+/*--------------*/
+/* Loading Page */
+/*--------------*/
 #loading-page {
   display: flex;
   justify-content: center;
@@ -89,13 +157,15 @@ canvas {
   color: #1f8ef1;
 }
 
-/* Home page */
+/*-----------*/
+/* Home Page */
+/*-----------*/
 #title {
   text-align: center;
   font-size: 128px;
   margin: 20px;
   color: #1f8ef1;
-  -webkit-text-stroke: 2px hsl(208, 88%, 30%);
+  -webkit-text-stroke: 2px #095190;
   transition: all 0.1s ease;
 }
 
@@ -148,6 +218,7 @@ canvas {
   right: 10px;
   top: 80%;
   transform: rotate(-15deg);
+  display: none;
 }
 
 #hint a {
@@ -166,25 +237,28 @@ canvas {
   color: #1f8ef1;
 }
 
-/* How to play page */
+/*------------------*/
+/* How To Play Page */
+/*------------------*/
 .instructions img {
   opacity: 0.8;
 }
 
 ul > li {
   margin: 1rem;
+  list-style: none;
 }
 
 h2 {
   text-align: center;
   font-size: 5rem;
-  font-weight: 900;
+  font-weight: 600;
   margin: 20px;
   letter-spacing: 3px;
   color: #1f8ef1;
-  text-shadow: 2px 2px 0 #4074b5, 2px -2px 0 #4074b5, -2px 2px 0 #4074b5,
-    -2px -2px 0 #4074b5, 2px 0px 0 #4074b5, 0px 2px 0 #4074b5,
-    -2px 0px 0 #4074b5, 0px -2px 0 #4074b5;
+  text-shadow: 2px 2px 0 #095190, 2px -2px 0 #095190, -2px 2px 0 #095190,
+    -2px -2px 0 #095190, 2px 0px 0 #095190, 0px 2px 0 #095190,
+    -2px 0px 0 #095190, 0px -2px 0 #095190;
 }
 
 p {
@@ -239,4 +313,19 @@ p {
 }
 .cell:nth-last-child(-n + 9) {
   border-bottom: 2px solid #333;
+}
+
+#preview-board {
+  display: grid;
+  grid-template-columns: repeat(9, 50px);
+  grid-template-rows: repeat(9, 50px);
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-weight: bold;
 }
