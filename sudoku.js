@@ -1,9 +1,11 @@
 // DOM elements
 const playBtn = document.getElementById("play");
 const board = document.getElementById("board");
+const settings = document.getElementsByClassName("settings")[0];
 const home = document.getElementsByClassName("home")[0];
 const howToPlay = document.getElementsByClassName("how-to-play")[0];
 const about = document.getElementsByClassName("about")[0];
+const loadingDiv = document.getElementById("loading-page");
 const worker = new Worker("worker.js", { type: "module" });
 
 // Handle messages from the worker
@@ -16,23 +18,32 @@ worker.onmessage = function (e) {
 };
 
 function playSukii(level) {
-  showLoadingPage();
+  showSettingsPage();
   worker.postMessage(level);
 }
 
-playBtn.addEventListener("click", () => playSukii("easy"));
+playBtn.addEventListener("click", () => playSukii("medium"));
 
-// Show and hide loading page function
-function showLoadingPage() {
-  const loadingDiv = document.getElementById("loading-page");
-  loadingDiv.style.display = "block";
+// Show and hide settings page functions
+function showSettingsPage() {
+  settings.style.display = "flex";
   home.style.display = "none";
   howToPlay.style.display = "none";
   about.style.display = "none";
 }
 
+function hideSettingsPage() {
+  settings.style.display = "none";
+  showLoadingPage();
+}
+
+// Show and hide loading page functions
+function showLoadingPage() {
+  loadingDiv.style.display = "block";
+  settings.style.display = "none";
+}
+
 function hideLoadingPage() {
-  const loadingDiv = document.getElementById("loading-page");
   loadingDiv.style.display = "none";
   board.style.display = "grid";
 }
@@ -73,6 +84,9 @@ function render(puzzle) {
         input.classList.add("puzzle-cell");
         input.dataset.row = row;
         input.dataset.col = col;
+        input.addEventListener("input", (e) => {
+          e.target.value = e.target.value.replace(/[^1-9]/g, "");
+        });
         cell.appendChild(input);
       }
       board.appendChild(cell);
