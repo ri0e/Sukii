@@ -17,6 +17,7 @@ let bgMode = "numbers";
 function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+  cells = [];
   generateCells();
 }
 
@@ -60,10 +61,13 @@ function setBgMode(mode) {
 // Generate cells with numbers OR imgs(based on bgMode)
 function generateCells() {
   cells = [];
-  const cols = Math.ceil(canvas.width / cellSize) + 4;
-  const rows = Math.ceil(canvas.height / cellSize) + 4;
-  const startX = -2 * cellSize;
-  const startY = -2 * cellSize;
+  // Use a slight buffer to ensure no gaps at the edges during movement
+  const cols = Math.ceil(canvas.width / cellSize) + 2;
+  const rows = Math.ceil(canvas.height / cellSize) + 2;
+
+  // Start the grid off-screen to create a seamless loop
+  const startX = -cellSize;
+  const startY = -cellSize;
 
   for (let r = 0; r < rows; r++) {
     let rowNums = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -97,7 +101,7 @@ function draw() {
 
   for (let cell of cells) {
     if (cell.type === "number") {
-      ctx.font = "bold " + cellSize * 0.65 + "px Fredoka";
+      ctx.font = "600 " + cellSize * 0.65 + "px Fredoka";
       ctx.fillStyle = "#99ccffff";
       ctx.fillText(cell.value, cell.x, cell.y);
     } else if (cell.type === "image" && cell.value.complete) {
@@ -127,15 +131,15 @@ function update(timestamp) {
 
       // Wrap cells so they re-enter aligned
       if (cell.x > canvas.width + cellSize) {
-        cell.x -= canvas.width + cellSize * 4;
-      } else if (cell.x < -cellSize * 4) {
-        cell.x += canvas.width + cellSize * 4;
+        cell.x -= canvas.width + cellSize * 2.5;
+      } else if (cell.x < -cellSize * 2.5) {
+        cell.x += canvas.width + cellSize * 2.5;
       }
 
       if (cell.y > canvas.height + cellSize) {
-        cell.y -= canvas.height + cellSize * 4;
-      } else if (cell.y < -cellSize * 4) {
-        cell.y += canvas.height + cellSize * 4;
+        cell.y -= canvas.height + cellSize * 2.5;
+      } else if (cell.y < -cellSize * 2.5) {
+        cell.y += canvas.height + cellSize * 2.5;
       }
     }
   }
