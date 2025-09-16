@@ -8,8 +8,8 @@
     <link rel="shortcut icon" href="data:,">
     <script defer src="bgAnimation.js" type="module"></script>
     <script defer src="loadingPages.js"></script>
-    <script defer src="sudoku.js"></script>
-    <script defer src="settings.js"></script>
+    <script defer src="sudoku.js" type="module"></script>
+    <script defer src="./settings.js" type="module"></script>
   </head>
   <body>
     <!-- The board -->
@@ -71,7 +71,7 @@
           >
         </div>
       </div>
-      <div class="board-container"><span id="preview-board"></span></div>
+      <div class="board-container"><span id="preview-board"></span><button id="start">start!</button></div>
     </div>
 
     <!--  Loading screen  -->

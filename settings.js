@@ -4,11 +4,14 @@ const size = document.querySelector('input[name="boardSize"]:checked');
 const dificulty = document.querySelector("input[name='deffeculity']:checked");
 
 // Colors
-let hintCellBgColor;
-let puzzleCellBgColor;
-let boardBordersColor;
-let inputColor;
-let puzzleColor = "#333";
+export let boardColors = {
+  hintCellBgColor: "",
+  puzzleCellBgColor: "",
+  boardBordersColor: "",
+  inputColor: "",
+  inputFocusColor: "",
+  puzzleColor: "#333",
+};
 
 // Change Board Colors
 function setBoardColors(selectedColor) {
@@ -19,48 +22,56 @@ function setBoardColors(selectedColor) {
 
   switch (selectedColor) {
     case "blue":
-      hintCellBgColor = "#e0f0ff";
-      puzzleCellBgColor = "#f0f8ff";
-      boardBordersColor = "#095190";
-      inputColor = "#1f8ef1";
+      boardColors.hintCellBgColor = "#3399ff";
+      boardColors.puzzleCellBgColor = "#d6ebffff";
+      boardColors.boardBordersColor = "#004080";
+      boardColors.inputColor = "#1e8ef1ff";
+      boardColors.inputFocusColor = "#a3d3ffff";
       break;
     case "red":
-      hintCellBgColor = "#ffe6e6";
-      puzzleCellBgColor = "#fff5f5";
-      boardBordersColor = "#c92a2a";
-      inputColor = "#ff4d4d";
+      boardColors.hintCellBgColor = "#ff4c4c";
+      boardColors.puzzleCellBgColor = "#ffe5e5";
+      boardColors.boardBordersColor = "#8b0000";
+      boardColors.inputColor = "#ff4d4d";
+      boardColors.inputFocusColor = "#ffb3b3ff";
       break;
     case "green":
-      hintCellBgColor = "#e6ffe6";
-      puzzleCellBgColor = "#f6fff6";
-      boardBordersColor = "#007f5f";
-      inputColor = "#00b894";
+      boardColors.hintCellBgColor = "#3bd16f";
+      boardColors.puzzleCellBgColor = "#dbffe3";
+      boardColors.boardBordersColor = "#1b5e20";
+      boardColors.inputColor = "#00b894";
+      boardColors.inputFocusColor = "#a8ffbbff";
       break;
     case "yellow":
-      hintCellBgColor = "#fff9e6";
-      puzzleCellBgColor = "#fffef5";
-      boardBordersColor = "#f4b400";
-      inputColor = "#ffcc00";
+      boardColors.hintCellBgColor = "#ffe156";
+      boardColors.puzzleCellBgColor = "#fff6cc";
+      boardColors.boardBordersColor = "#c79a00";
+      boardColors.inputColor = "#ffcc00";
+      boardColors.inputFocusColor = "#ffec99ff";
       break;
     case "orange":
-      hintCellBgColor = "#fff0e6";
-      puzzleCellBgColor = "#fffaf5";
-      boardBordersColor = "#d35400";
-      inputColor = "#ff8c42";
+      boardColors.hintCellBgColor = "#ff944d";
+      boardColors.puzzleCellBgColor = "#ffe9d6";
+      boardColors.boardBordersColor = "#cc5500";
+      boardColors.inputColor = "#ff8c42";
+      boardColors.inputFocusColor = "#ffcea3ff";
       break;
     case "purple":
-      hintCellBgColor = "#f5e6ff";
-      puzzleCellBgColor = "#fcf7ff";
-      boardBordersColor = "#6f42c1";
-      inputColor = "#a66cff";
+      boardColors.hintCellBgColor = "#b266ff";
+      boardColors.puzzleCellBgColor = "#f3e0ff";
+      boardColors.boardBordersColor = "#4b0082";
+      boardColors.inputColor = "#a66cff";
+      boardColors.inputFocusColor = "hsla(277, 100%, 84%, 1.00)";
       break;
     case "pink":
-      hintCellBgColor = "#ffe6f1";
-      puzzleCellBgColor = "#fff5fa";
-      boardBordersColor = "#d63384";
-      inputColor = "#ff69b4";
+      boardColors.hintCellBgColor = "#ff6b9c";
+      boardColors.puzzleCellBgColor = "#ffe0eb";
+      boardColors.boardBordersColor = "#a33b65";
+      boardColors.inputColor = "#ff69b4";
+      boardColors.inputFocusColor = "#ffadcaff";
       break;
   }
+
   renderPreview(previewBoard);
 }
 
@@ -88,20 +99,22 @@ function renderPreview(puzzle) {
       cell.classList.add("cell");
 
       // Add thicker borders for 3x3 boxes
-      cell.style.borderColor = boardBordersColor;
+      cell.style.borderColor = boardColors.boardBordersColor;
       if (row % 3 === 0)
-        cell.style.borderTop = `2px solid ${boardBordersColor}`;
+        cell.style.borderTop = `2px solid ${boardColors.boardBordersColor}`;
       if (col % 3 === 0)
-        cell.style.borderLeft = `2px solid ${boardBordersColor}`;
-      if (row === 8) cell.style.borderBottom = `2px solid ${boardBordersColor}`;
-      if (col === 8) cell.style.borderRight = `2px solid ${boardBordersColor}`;
+        cell.style.borderLeft = `2px solid ${boardColors.boardBordersColor}`;
+      if (row === 8)
+        cell.style.borderBottom = `2px solid ${boardColors.boardBordersColor}`;
+      if (col === 8)
+        cell.style.borderRight = `2px solid ${boardColors.boardBordersColor}`;
 
       const value = puzzle[row][col];
       if (value !== 0) {
         // Hint cell
         cell.textContent = value;
-        cell.style.backgroundColor = hintCellBgColor;
-        cell.style.color = puzzleColor;
+        cell.style.backgroundColor = boardColors.hintCellBgColor;
+        cell.style.color = boardColors.puzzleColor;
         cell.style.fontWeight = "bold";
       } else {
         // Puzzle cell
@@ -117,8 +130,14 @@ function renderPreview(puzzle) {
         input.style.fontSize = "1rem";
         input.style.fontFamily = "Fredoka";
         input.style.border = "none";
-        input.style.backgroundColor = puzzleCellBgColor;
-        input.style.color = inputColor;
+        input.style.backgroundColor = boardColors.puzzleCellBgColor;
+        input.style.color = boardColors.inputColor;
+        input.addEventListener("focus", () => {
+          input.style.background = boardColors.inputFocusColor;
+        });
+        input.addEventListener("blur", () => {
+          input.style.background = boardColors.puzzleCellBgColor;
+        });
         input.addEventListener("input", (e) => {
           e.target.value = e.target.value.replace(/[^1-9]/g, "");
         });
