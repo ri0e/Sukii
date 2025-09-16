@@ -301,6 +301,7 @@ p {
   font-family: "Fredoka", sans-serif;
   color: #1f8ef1;
   background-color: transparent;
+  font-weight: bold;
 }
 
 .cell:nth-child(3n + 1) {
