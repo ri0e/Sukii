@@ -53,7 +53,7 @@ function shuffle(array) {
   return array;
 }
 
-function setBgMode(mode) {
+export function setBgMode(mode) {
   bgMode = mode;
   generateCells();
 }
