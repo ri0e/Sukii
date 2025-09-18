@@ -22,49 +22,49 @@ function setBoardColors(selectedColor) {
 
   switch (selectedColor) {
     case "blue":
-      boardColors.hintCellBgColor = "#3399ff";
+      boardColors.hintCellBgColor = "#4da6ffff";
       boardColors.puzzleCellBgColor = "#d6ebffff";
       boardColors.boardBordersColor = "#004080";
       boardColors.inputColor = "#1e8ef1ff";
       boardColors.inputFocusColor = "#a3d3ffff";
       break;
     case "red":
-      boardColors.hintCellBgColor = "#ff4c4c";
+      boardColors.hintCellBgColor = "#ff6666ff";
       boardColors.puzzleCellBgColor = "#ffe5e5";
       boardColors.boardBordersColor = "#8b0000";
       boardColors.inputColor = "#ff4d4d";
       boardColors.inputFocusColor = "#ffb3b3ff";
       break;
     case "green":
-      boardColors.hintCellBgColor = "#3bd16f";
+      boardColors.hintCellBgColor = "#51d680ff";
       boardColors.puzzleCellBgColor = "#dbffe3";
       boardColors.boardBordersColor = "#1b5e20";
       boardColors.inputColor = "#00b894";
       boardColors.inputFocusColor = "#a8ffbbff";
       break;
     case "yellow":
-      boardColors.hintCellBgColor = "#ffe156";
+      boardColors.hintCellBgColor = "#ffe366ff";
       boardColors.puzzleCellBgColor = "#fff6cc";
       boardColors.boardBordersColor = "#c79a00";
       boardColors.inputColor = "#ffcc00";
       boardColors.inputFocusColor = "#ffec99ff";
       break;
     case "orange":
-      boardColors.hintCellBgColor = "#ff944d";
+      boardColors.hintCellBgColor = "#ffa366ff";
       boardColors.puzzleCellBgColor = "#ffe9d6";
       boardColors.boardBordersColor = "#cc5500";
       boardColors.inputColor = "#ff8c42";
       boardColors.inputFocusColor = "#ffcea3ff";
       break;
     case "purple":
-      boardColors.hintCellBgColor = "#b266ff";
+      boardColors.hintCellBgColor = "#bf80ffff";
       boardColors.puzzleCellBgColor = "#f3e0ff";
       boardColors.boardBordersColor = "#4b0082";
       boardColors.inputColor = "#a66cff";
       boardColors.inputFocusColor = "hsla(277, 100%, 84%, 1.00)";
       break;
     case "pink":
-      boardColors.hintCellBgColor = "#ff6b9c";
+      boardColors.hintCellBgColor = "#ff85adff";
       boardColors.puzzleCellBgColor = "#ffe0eb";
       boardColors.boardBordersColor = "#a33b65";
       boardColors.inputColor = "#ff69b4";
@@ -96,7 +96,7 @@ function renderPreview(puzzle) {
   for (let row = 0; row < 9; row++) {
     for (let col = 0; col < 9; col++) {
       const cell = document.createElement("div");
-      cell.classList.add("cell");
+      cell.classList.add("cell-preview");
 
       // Add thicker borders for 3x3 boxes
       cell.style.borderColor = boardColors.boardBordersColor;
@@ -129,11 +129,13 @@ function renderPreview(puzzle) {
         input.style.textAlign = "center";
         input.style.fontSize = "1rem";
         input.style.fontFamily = "Fredoka";
+        input.style.fontWeight = "bold";
         input.style.border = "none";
         input.style.backgroundColor = boardColors.puzzleCellBgColor;
         input.style.color = boardColors.inputColor;
         input.addEventListener("focus", () => {
           input.style.background = boardColors.inputFocusColor;
+          input.style.outline = "none";
         });
         input.addEventListener("blur", () => {
           input.style.background = boardColors.puzzleCellBgColor;
