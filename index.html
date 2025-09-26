@@ -10,6 +10,7 @@
     <script defer src="loadingPages.js"></script>
     <script defer src="sudoku.js" type="module"></script>
     <script defer src="./settings.js" type="module"></script>
+    <script defer src="./render.js" type="module"></script>
   </head>
   <body>
     <!-- The board -->
@@ -66,7 +67,6 @@
 
         <h3>Board Size</h3>
         <div class="options">
-          <label><input type="radio" name="boardSize" value="3" />3x3</label>
           <label><input type="radio" name="boardSize" value="4" />4x4</label>
           <label><input type="radio" name="boardSize" value="6" />6x6</label>
           <label><input type="radio" name="boardSize" value="9" />9x9</label>
@@ -82,8 +82,8 @@
             ><input
               type="radio"
               name="deffeculity"
-              value="meduim"
-            />Meduim</label
+              value="medium"
+            />Medium</label
           >
           <label
             ><input type="radio" name="deffeculity" value="hard" />Hard</label
@@ -183,15 +183,6 @@
         Sudoku is my favorite, but I wished it felt warmer and cuter… so I made
         Sukii for you (and me hehe)!
       </p>
-
-      <div hidden>
-        <h4>Have a Good Idea or Tip for Sukii? Tell me!</h4>
-        <p>
-          <a href="">Slack</a>
-          <a href="">Insta</a>
-          <a href="">Github</a>
-        </p>
-      </div>
     </div>
 
     <!-- Footer-->
