@@ -1,12 +1,48 @@
-self.onmessage = async (e) => {
-  const level = e.data;
+import { easy9x9 } from "./sudokuGrids/9x9/easy.js";
+import { hard9x9 } from "./sudokuGrids/9x9/hard.js";
+import { expert9x9 } from "./sudokuGrids/9x9/expert.js";
+import { medium9x9 } from "./sudokuGrids/9x9/medium.js";
+import { easy4x4 } from "./sudokuGrids/4x4/easy.js";
+import { easy6x6 } from "./sudokuGrids/6x6/easy.js";
+import { hard16x16 } from "./sudokuGrids/16x16/hard.js";
+
+self.onmessage = (e) => {
+  const { level, size } = e.data;
+
   try {
-    const { generate } = await import("https://esm.sh/sudoku-core");
-    const puzzle = generate(level);
+    let boardSize;
+    switch (size) {
+      case 4:
+        boardSize = easy4x4;
+        break;
+      case 6:
+        boardSize = easy6x6;
+        break;
+      case 9:
+        boardSize = {
+          easy: easy9x9,
+          medium: medium9x9,
+          hard: hard9x9,
+          expert: expert9x9,
+        };
+        break;
+      case 16:
+        boardSize = hard16x16;
+        break;
+      default:
+        throw new Error("Invalid board size");
+    }
+
+    let pool = boardSize;
+    if (size === 9) {
+      pool = boardSize[level];
+    }
+    let randomIndex = Math.floor(Math.random() * pool.length);
+    let chosen = pool[randomIndex];
+    let puzzle = Array.isArray(chosen.puzzle) ? chosen.puzzle : chosen;
     self.postMessage(puzzle);
   } catch (error) {
     console.error("Error generating puzzle:", error);
     self.postMessage(null);
   }
 };
-
