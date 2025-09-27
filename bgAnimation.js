@@ -10,6 +10,10 @@ let cells = [];
 let lastTime = 0;
 const fpsInterval = 1000 / 60;
 
+// Stop/ start bg movement button
+const isMovingBtn = document.getElementById("move");
+let isMoving = true;
+
 // Control the loading page mode
 let bgMode = "numbers";
 
@@ -62,8 +66,8 @@ export function setBgMode(mode) {
 function generateCells() {
   cells = [];
   // Use a slight buffer to ensure no gaps at the edges during movement
-  const cols = Math.ceil(canvas.width / cellSize) + 2;
-  const rows = Math.ceil(canvas.height / cellSize) + 2;
+  const cols = Math.ceil(canvas.width / cellSize) + 0.8;
+  const rows = Math.ceil(canvas.height / cellSize) + 0.8;
 
   // Start the grid off-screen to create a seamless loop
   const startX = -cellSize;
@@ -131,26 +135,40 @@ function update(timestamp) {
 
       // Wrap cells so they re-enter aligned
       if (cell.x > canvas.width + cellSize) {
-        cell.x -= canvas.width + cellSize * 2.5;
-      } else if (cell.x < -cellSize * 2.5) {
-        cell.x += canvas.width + cellSize * 2.5;
+        cell.x -= canvas.width + cellSize * 2;
+      } else if (cell.x < -cellSize * 2) {
+        cell.x += canvas.width + cellSize * 2;
       }
 
       if (cell.y > canvas.height + cellSize) {
-        cell.y -= canvas.height + cellSize * 2.5;
-      } else if (cell.y < -cellSize * 2.5) {
-        cell.y += canvas.height + cellSize * 2.5;
+        cell.y -= canvas.height + cellSize * 2;
+      } else if (cell.y < -cellSize * 2) {
+        cell.y += canvas.height + cellSize * 2;
       }
     }
   }
 }
 
 // Animation loop
+let animationId;
+
 function animate(timestamp) {
   update(timestamp);
   draw();
-  requestAnimationFrame(animate);
+  animationId = requestAnimationFrame(animate);
 }
 
-requestAnimationFrame(animate);
+// Start animation
+animationId = requestAnimationFrame(animate);
+
+// Button toggles movement
+isMovingBtn.addEventListener("click", () => {
+  isMoving = !isMoving;
+
+  if (isMoving) {
+    animationId = requestAnimationFrame(animate);
+  } else {
+    cancelAnimationFrame(animationId);
+  }
+});
 setBgMode("numbers");
