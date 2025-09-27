@@ -12,20 +12,38 @@ const about = document.getElementsByClassName("about")[0];
 const loadingPage = document.getElementById("loading-page");
 const playPage = document.getElementsByClassName("playPage")[0];
 const worker = new Worker("worker.js", { type: "module" });
+////
+const sudokusPage = document.getElementsByClassName("sudokus")[0];
+const sudokusContainer =
+  document.getElementsByClassName("sudokus-container")[0];
 
 import { render } from "./render.js";
 import { setBgMode } from "./bgAnimation.js";
 
 // Handle messages from the worker
 worker.onmessage = function (e) {
-  const puzzle = e.data;
+  const { puzzles, solutions, selectedLength } = e.data;
 
   loadingPage.style.display = "none";
-  playPage.style.display = "flex";
-  board.style.display = "grid";
+  sudokusPage.style.display = "flex";
 
-  console.log("Generated Sudoku:", puzzle);
-  render(puzzle);
+  sudokusContainer.innerHTML = "";
+
+  for (let i = 0; i < selectedLength; i++) {
+    const sudokusBtn = document.createElement("button");
+    sudokusBtn.textContent = i;
+    sudokusBtn.id = `sudoku ${i}`;
+    sudokusBtn.className = "sudokus-levels";
+
+    sudokusBtn.addEventListener("click", () => {
+      sudokusPage.style.display = "none";
+      playPage.style.display = "flex";
+      board.style.display = "grid";
+      render(puzzles[i]);
+      console.log(solutions[i]);
+    });
+    sudokusContainer.appendChild(sudokusBtn);
+  }
 };
 
 playBtn.addEventListener("click", () => {
