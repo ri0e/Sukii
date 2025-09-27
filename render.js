@@ -1,5 +1,8 @@
 // Board Colors
 import { boardColors } from "./settings.js";
+let notesMode = false;
+
+const noteBtn = document.getElementById("note");
 
 // DOM Elements
 const board = document.getElementById("board");
@@ -116,14 +119,22 @@ export function render(puzzle) {
 [btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9].forEach((btn) => {
   btn.addEventListener("click", () => {
     if (selectedInput) {
-      selectedInput.textContent = btn.textContent;
+      if (notesMode) {
+        addNote(selectedInput, btn.textContent);
+      } else {
+        setFinalNum(selectedInput, btn.textContent);
+      }
     }
   });
 });
 
 erase.addEventListener("click", () => {
   if (selectedInput) {
-    selectedInput.textContent = "";
+    if (notesMode) {
+      selectedInput.textContent = "";
+    } else {
+      selectedInput.textContent = "";
+    }
   }
 });
 
@@ -132,8 +143,35 @@ document.addEventListener("keydown", (e) => {
   if (!selectedInput) return;
 
   if (/[1-9]/.test(e.key)) {
-    selectedInput.textContent = e.key;
+    if (notesMode) {
+      addNote(selectedInput, e.key);
+    } else {
+      setFinalNum(selectedInput, e.key);
+    }
   } else if (e.key === "Backspace" || e.key === "Delete") {
-    selectedInput.textContent = "";
+    if (notesMode) {
+      selectedInput.textContent = "";
+    } else {
+      selectedInput.textContent = "";
+    }
   }
 });
+
+noteBtn.addEventListener("click", () => {
+  notesMode = !notesMode;
+  console.log(notesMode);
+});
+
+function addNote(cell, num) {
+  cell.classList.add("notes");
+  if ([...cell.children].some((n) => n.textContent === num)) return;
+
+  const note = document.createElement("span");
+  note.textContent = num;
+  cell.appendChild(note);
+}
+
+function setFinalNum(cell, num) {
+  cell.classList.remove("notes");
+  cell.textContent = num;
+}
