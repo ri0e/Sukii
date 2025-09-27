@@ -39,7 +39,7 @@ self.onmessage = (e) => {
     }
     let randomIndex = Math.floor(Math.random() * pool.length);
     let chosen = pool[randomIndex];
-    let puzzle = Array.isArray(chosen.puzzle) ? chosen.puzzle : chosen;
+    let puzzle = chosen.puzzle;
     self.postMessage(puzzle);
   } catch (error) {
     console.error("Error generating puzzle:", error);
