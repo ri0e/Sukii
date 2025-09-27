@@ -29,20 +29,42 @@ self.onmessage = (e) => {
       case 16:
         boardSize = hard16x16;
         break;
-      default:
-        throw new Error("Invalid board size");
     }
+
+    const length = {
+      4: easy4x4.length,
+      6: easy6x6.length,
+      9: {
+        easy: easy9x9.length,
+        medium: medium9x9.length,
+        hard: hard9x9.length,
+        expert: expert9x9.length,
+      },
+      16: hard16x16.length,
+    };
 
     let pool = boardSize;
     if (size === 9) {
       pool = boardSize[level];
     }
-    let randomIndex = Math.floor(Math.random() * pool.length);
-    let chosen = pool[randomIndex];
-    let puzzle = chosen.puzzle;
-    self.postMessage(puzzle);
+
+    let selectedLength;
+    if (size === 9) {
+      selectedLength = length[9][level];
+    } else {
+      selectedLength = length[size];
+    }
+    const puzzles = pool.map((entry) => entry.puzzle);
+    const solutions = pool.map((entry) => entry.solution);
+
+    console.log(selectedLength);
+    self.postMessage({
+      puzzles,
+      solutions,
+      selectedLength,
+    });
   } catch (error) {
-    console.error("Error generating puzzle:", error);
+    console.error("Error fetching puzzle:", error);
     self.postMessage(null);
   }
 };
