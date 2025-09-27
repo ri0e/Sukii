@@ -13,21 +13,6 @@ const loadingPage = document.getElementById("loading-page");
 const playPage = document.getElementsByClassName("playPage")[0];
 const worker = new Worker("worker.js", { type: "module" });
 
-// Buttons
-const btn1 = document.getElementById("one");
-const btn2 = document.getElementById("two");
-const btn3 = document.getElementById("three");
-const btn4 = document.getElementById("four");
-const btn5 = document.getElementById("five");
-const btn6 = document.getElementById("six");
-const btn7 = document.getElementById("seven");
-const btn8 = document.getElementById("eight");
-const btn9 = document.getElementById("nine");
-const erase = document.getElementById("erase");
-const note = document.getElementById("note");
-const quick = document.getElementById("quickMode");
-let selectedInput = null;
-
 import { render } from "./render.js";
 import { setBgMode } from "./bgAnimation.js";
 
@@ -75,30 +60,4 @@ startBtn.addEventListener("click", () => {
   backBtn.style.display = "block";
 
   worker.postMessage({ size, level });
-});
-
-// Buttons control (for all devices)
-[btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9].forEach((btn) => {
-  btn.addEventListener("click", () => {
-    if (selectedInput) {
-      selectedInput.textContent = btn.textContent;
-    }
-  });
-});
-
-erase.addEventListener("click", () => {
-  if (selectedInput) {
-    selectedInput.textContent = "";
-  }
-});
-
-// Keyboard controls (desktop only)
-document.addEventListener("keydown", (e) => {
-  if (!selectedInput) return;
-
-  if (/[1-9]/.test(e.key)) {
-    selectedInput.textContent = e.key;
-  } else if (e.key === "Backspace" || e.key === "Delete") {
-    selectedInput.textContent = "";
-  }
 });
