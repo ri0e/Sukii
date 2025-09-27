@@ -34,6 +34,65 @@ canvas {
   opacity: 0.9;
 }
 
+#move {
+  border-radius: 50%;
+  padding-block: 12px;
+  padding-inline: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 15px;
+  right: 18px;
+  margin: 0;
+}
+
+.sudokus {
+  height: 100vh;
+  width: 100%;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sudokus h2 {
+  margin: 2rem;
+}
+
+.sudokus #back-to-settings {
+  position: fixed;
+  bottom: 0.7rem;
+  left: 1rem;
+}
+
+.sudokus-container {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 6.3rem);
+  grid-template-rows: repeat(auto-fill, 6.3rem);
+  gap: 2rem;
+  width: 70%;
+}
+
+button.sudokus-levels {
+  font-size: 2rem;
+  color: #f0f0f0;
+  background: #1f8ef1;
+  padding: 3rem 3rem;
+  margin: 1rem;
+  width: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+}
+
+button.sudokus-levels:hover {
+  transform: scale(1.1);
+  font-size: 2rem;
+}
+
 .buttons-container {
   display: grid;
   grid-template-columns: repeat(3, 100px);
@@ -43,6 +102,9 @@ canvas {
 
 .buttons-container button {
   margin: 1rem;
+}
+
+.buttons-container div #check-sol {
 }
 
 .playPage {
@@ -341,8 +403,8 @@ p {
 }
 
 .puzzle-cell {
-  width: calc(4rem - 2px);
-  height: calc(4rem - 2px);
+  width: calc(4rem - 3px);
+  height: calc(4rem - 3px);
   box-sizing: border-box;
   display: flex;
   text-align: center;
@@ -355,7 +417,8 @@ p {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  font-size: 0.3rem;
+
+  font-size: 0.8rem;
   color: #ccc;
   text-align: center;
 }
