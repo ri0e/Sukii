@@ -154,6 +154,10 @@ canvas {
   margin: 0;
 }
 
+#move:hover svg path {
+  fill: #1f8ef1;
+  stroke: #1f8ef1;
+}
 /* ==== HOME PAGE ==== */
 #title {
   text-align: center;
@@ -352,6 +356,11 @@ button.sudokus-levels:hover {
   font-size: 2.2rem;
   font-family: "Trebuchet MS", sans-serif;
   margin: 1rem;
+}
+
+li span {
+  color: #1f8ef1;
+  font-weight: 500;
 }
 
 .settings div .options {
