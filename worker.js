@@ -57,13 +57,11 @@ self.onmessage = (e) => {
     const puzzles = pool.map((entry) => entry.puzzle);
     const solutions = pool.map((entry) => entry.solution);
 
-    console.log(selectedLength);
     self.postMessage({
       puzzles,
       solutions,
       selectedLength,
     });
-    console.log(e.data);
   } catch (error) {
     console.error("Error fetching puzzle:", error);
     self.postMessage(null);

@@ -46,7 +46,6 @@ export function render(puzzle) {
     return;
   }
 
-  console.log(puzzleArray);
   const size = Math.sqrt(puzzleArray.length);
   let sizeSelect = parseInt(
     document.querySelector('input[name="boardSize"]:checked').value,
@@ -58,7 +57,6 @@ export function render(puzzle) {
   }
 
   // Board Style
-  console.log(sizeSelect);
   board.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
   board.style.gridTemplateRows = `repeat(${size}, 1fr)`;
 

@@ -60,7 +60,6 @@ worker.onmessage = function (e) {
 
       currentSudoku = puzzle;
       currentSol = solutions[i];
-      console.log(currentSol);
     });
 
     sudokusContainer.appendChild(sudokusBtn);
