@@ -63,6 +63,7 @@ self.onmessage = (e) => {
       solutions,
       selectedLength,
     });
+    console.log(e.data);
   } catch (error) {
     console.error("Error fetching puzzle:", error);
     self.postMessage(null);

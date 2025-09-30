@@ -3,8 +3,8 @@ const canvas = document.getElementById("bgCanvas");
 const ctx = canvas.getContext("2d");
 
 const cellSize = 100;
-const speedX = -0.7;
-const speedY = 1.4;
+const speedX = -0.3;
+const speedY = 0.7;
 
 let cells = [];
 let lastTime = 0;
@@ -17,12 +17,13 @@ let isMoving = true;
 // Control the loading page mode
 let bgMode = "numbers";
 
-// Resize canvas function (need fix)
+// Resize canvas function
 function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   cells = [];
   generateCells();
+  lastTime = 0;
 }
 
 // Load kaomoji Imgs
@@ -66,8 +67,8 @@ export function setBgMode(mode) {
 function generateCells() {
   cells = [];
   // Use a slight buffer to ensure no gaps at the edges during movement
-  const cols = Math.ceil(canvas.width / cellSize) + 0.8;
-  const rows = Math.ceil(canvas.height / cellSize) + 0.8;
+  const cols = Math.ceil(canvas.width / cellSize) + 2;
+  const rows = Math.ceil(canvas.height / cellSize) + 2;
 
   // Start the grid off-screen to create a seamless loop
   const startX = -cellSize;
@@ -135,15 +136,15 @@ function update(timestamp) {
 
       // Wrap cells so they re-enter aligned
       if (cell.x > canvas.width + cellSize) {
-        cell.x -= canvas.width + cellSize * 2;
-      } else if (cell.x < -cellSize * 2) {
-        cell.x += canvas.width + cellSize * 2;
+        cell.x -= canvas.width + cellSize * 2.7;
+      } else if (cell.x < -cellSize * 2.7) {
+        cell.x += canvas.width + cellSize * 2.7;
       }
 
       if (cell.y > canvas.height + cellSize) {
-        cell.y -= canvas.height + cellSize * 2;
-      } else if (cell.y < -cellSize * 2) {
-        cell.y += canvas.height + cellSize * 2;
+        cell.y -= canvas.height + cellSize * 2.7;
+      } else if (cell.y < -cellSize * 2.7) {
+        cell.y += canvas.height + cellSize * 2.7;
       }
     }
   }
@@ -171,4 +172,4 @@ isMovingBtn.addEventListener("click", () => {
     cancelAnimationFrame(animationId);
   }
 });
-setBgMode("numbers");
+setBgMode("images");

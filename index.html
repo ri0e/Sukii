@@ -6,14 +6,43 @@
     <title>Sukii</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" href="data:,">
-    <script defer src="bgAnimation.js" type="module"></script>
-    <script defer src="loadingPages.js"></script>
-    <script defer src="sudoku.js" type="module"></script>
+    <script defer src="./bgAnimation.js" type="module"></script>
+    <script defer src="./loadingPages.js"></script>
+    <script defer src="./sudoku.js" type="module"></script>
     <script defer src="./settings.js" type="module"></script>
     <script defer src="./render.js" type="module"></script>
     <script defer src="./difficulty.js"></script>
+    <script defer src="./worker.js" type="module"></script>
   </head>
   <body>
+    <div class="content-wrapper">
+    <!-- Toast Notification -->
+    <div class="check-sol-div">
+      <h2>Congrats!</h2>
+      <p>you're a star!</p>
+      <button id="win-go-home">Go Home</button>
+    </div>
+
+    <div class="check-sol-div-not-win">
+      <h2>Ops!</h2>
+      <p>hmm, something is wrong. Try again!</p>
+      <button id="re-try">Try Again!</button>
+    </div>
+
+    <div id="error-diffi" class="notification">
+      <p>Please Choose a Difficulty Level :3</p>
+      <button id="ok-diffi">OK!</button>
+    </div>
+
+    <div id="error-size" class="notification">
+      <p>Please Choose a Board Size :3</p>
+      <button id="ok-size">OK!</button>
+    </div>
+
+    <div id="warning-color" class="notification">
+      <p>If You Don’t Pick a Color, the Board Will Be Blue :3</p>
+      <button id="ok-color">OK!</button>
+    </div>
     <!-- Animation Button -->
     <button id="move">
       <svg
@@ -75,14 +104,14 @@
         <button id="note"><svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="20px" height="20px" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#1C274C" stroke="none">
   <path d="M3795 4945 c-81 -17 -165 -56 -239 -109 -33 -25 -685 -669 -1448 -1433 l-1386 -1388 -281 -851 c-155 -468 -281 -864 -281 -880 0 -58 67 -124 127 -124 10 0 403 128 873 285 l855 285 1411 1413 c1538 1538 1453 1448 1505 1617 19 59 23 99 23 185 0 86 -4 126 -23 185 -45 148 -72 183 -350 461 -246 247 -259 258 -342 298 -48 23 -117 48 -155 56 -84 18 -208 18 -289 0z m288 -275 c78 -29 120 -66 348 -296 213 -217 243 -259 257 -369 19 -151 -23 -256 -158 -390 l-90 -90 -461 460 -460 460 90 87 c50 48 110 98 133 112 100 59 227 68 341 26z m-290 -878 l457 -457 -1150 -1150 -1150 -1150 -460 460 -460 460 1147 1147 c632 632 1150 1148 1153 1148 3 0 211 -206 463 -458z m-2489 -2491 l399 -399 -590 -196 c-325 -108 -595 -196 -601 -196 -6 0 77 262 184 583 211 632 202 607 206 607 2 0 183 -179 402 -399z"/></g>
         </svg></button>
-        <button id="quickMode"><svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="20px" height="20px" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#1C274C" stroke="none">
+        <button id="quickMode" hidden><svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="20px" height="20px" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#1C274C" stroke="none">
   <path d="M2015 4786 c-94 -41 -124 -169 -58 -247 45 -53 73 -59 268 -59 l175 0 0 -164 0 -163 -62 -7 c-192 -21 -417 -87 -605 -176 -521 -248 -902 -716 -1039 -1275 -251 -1030 381 -2069 1411 -2321 736 -179 1519 97 1977 698 415 545 510 1260 252 1893 -25 61 -64 144 -86 185 -48 89 -169 269 -198 295 -11 10 -20 23 -20 29 0 5 63 73 139 151 150 150 161 171 146 252 -9 49 -69 109 -118 118 -81 16 -101 4 -255 -148 -107 -106 -146 -139 -156 -132 -7 6 -46 35 -87 66 -260 195 -598 330 -916 365 l-63 7 0 163 0 163 189 3 c173 3 192 5 217 24 53 39 69 71 69 134 0 63 -16 95 -69 134 -27 21 -40 21 -554 23 -423 2 -533 0 -557 -11z m849 -976 c648 -130 1137 -622 1268 -1275 30 -148 32 -421 4 -570 -108 -586 -511 -1053 -1071 -1242 -178 -60 -295 -77 -510 -77 -158 0 -208 4 -295 22 -373 80 -692 266 -920 540 -182 217 -296 456 -352 737 -32 159 -32 434 0 590 87 434 326 795 687 1036 209 140 430 220 730 263 73 11 363 -4 459 -24z"/>
   <path d="M2495 3346 c-37 -17 -70 -52 -84 -89 -7 -19 -11 -201 -11 -538 0 -414 3 -516 14 -542 8 -18 135 -152 282 -299 290 -287 293 -290 381 -273 49 9 109 69 118 118 17 87 12 94 -240 347 l-234 235 -3 477 c-3 463 -4 477 -24 504 -11 15 -32 37 -46 47 -34 25 -113 32 -153 13z"/>
         </g>
         </svg></button>
-        <div>
+        
         <button id="check-sol">Check my solution</button>
-      </div>
+      
       </div>
      </div>
 
@@ -115,7 +144,7 @@
           <label><input type="radio" name="boardSize" value="4" />4x4</label>
           <label><input type="radio" name="boardSize" value="6" />6x6</label>
           <label><input type="radio" name="boardSize" value="9" />9x9</label>
-          <label><input type="radio" name="boardSize" value="16" />16x16</label>
+          <label><input type="radio" name="boardSize" value="16" />16x16 <p>(not ready)</p></label>
         </div>
 
         <h3>Difficulty</h3>
@@ -161,14 +190,14 @@
       </h3>
       <button id="play">Let's Play!</button>
       <p id="hint">
-        <a href="#how-to-play"
+        <a href="#HTP"
           >Don't Know How to Play? No Problem! Click Here!</a
         >
       </p>
     </div>
 
     <!--  Game instructions section  -->
-    <div class="how-to-play">
+    <div class="how-to-play" id="HTP">
       <h2 id="how">How To Play Sudoku</h2>
       <ul class="instructions">
         <li>
@@ -229,7 +258,7 @@
         Sukii for you (and me hehe)!
       </p>
     </div>
-
+    </div>
     <!-- Footer-->
     <footer>
       <p>Made with 🩷 by Rei >w<</p>

@@ -21,7 +21,7 @@ const quick = document.getElementById("quickMode");
 let selectedInput = null;
 
 function getBoxSize(size) {
-  if (size === 6) return 3;
+  if (size === 6) return 66;
   return Math.sqrt(size);
 }
 
@@ -59,8 +59,8 @@ export function render(puzzle) {
 
   // Board Style
   console.log(sizeSelect);
-  board.style.gridTemplateColumns = `repeat(${size},4rem)`;
-  board.style.gridTemplateRows = `repeat(${size}, 4rem)`;
+  board.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+  board.style.gridTemplateRows = `repeat(${size}, 1fr)`;
 
   board.innerHTML = "";
   for (let row = 0; row < sizeSelect; row++) {
@@ -72,15 +72,28 @@ export function render(puzzle) {
       // Add thicker borders for boxes
       cell.style.border = `1px solid #333`;
       cell.style.borderColor = boardColors.boardBordersColor;
-      if (row % getBoxSize(size) === 0)
-        cell.style.borderTop = `2px solid ${boardColors.boardBordersColor}`;
-      if (col % getBoxSize(size) === 0)
-        cell.style.borderLeft = `2px solid ${boardColors.boardBordersColor}`;
-      if (row === sizeSelect - 1)
-        cell.style.borderBottom = `2px solid ${boardColors.boardBordersColor}`;
-      if (col === sizeSelect - 1)
-        cell.style.borderRight = `2px solid ${boardColors.boardBordersColor}`;
+      if (getBoxSize(size) === 66) {
+        let colBox = 3;
+        let rowBox = 2;
 
+        if (row % rowBox === 0)
+          cell.style.borderTop = `2px solid ${boardColors.boardBordersColor}`;
+        if (col % colBox === 0)
+          cell.style.borderLeft = `2px solid ${boardColors.boardBordersColor}`;
+        if (row === sizeSelect - 1)
+          cell.style.borderBottom = `2px solid ${boardColors.boardBordersColor}`;
+        if (col === sizeSelect - 1)
+          cell.style.borderRight = `2px solid ${boardColors.boardBordersColor}`;
+      } else {
+        if (row % getBoxSize(size) === 0)
+          cell.style.borderTop = `2px solid ${boardColors.boardBordersColor}`;
+        if (col % getBoxSize(size) === 0)
+          cell.style.borderLeft = `2px solid ${boardColors.boardBordersColor}`;
+        if (row === sizeSelect - 1)
+          cell.style.borderBottom = `2px solid ${boardColors.boardBordersColor}`;
+        if (col === sizeSelect - 1)
+          cell.style.borderRight = `2px solid ${boardColors.boardBordersColor}`;
+      }
       const value = puzzleGrid[row][col];
       if (value !== null) {
         // hint cell
